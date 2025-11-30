@@ -1,4 +1,4 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import fs from "node:fs/promises";
@@ -8,6 +8,73 @@ const server = new McpServer({
     version: "1.0.0",
 })
 
+// First Resource
+server.resource(
+    "users", 
+    "users://all",
+    {
+        description: "Get all users data from the database",
+        title: "Users",
+        mimeType: "application/json"
+    }, async uri => {
+
+        const users = await import ("./data/users.json", {
+        with: {
+            type: "json"
+        }
+    }).then(m => m.default)
+    
+    const user = users.find(u => u.id === parseInt(userID as string))
+
+    if(user == null){
+        return {
+            contents: [
+                {
+                    uri: uri.href, 
+                    text: JSON.stringify({ error: "User not found" }), 
+                    mimeType: "application/json"
+                },
+            ]
+        }
+    }
+
+        
+
+        return {
+            contents: [
+                {
+                    uri: uri.href, text: JSON.stringify(user), mimeType: "application/json"
+                },
+            ]
+        }
+    }
+)
+
+// First Resource Template
+// server.resource("user-details", new ResourceTemplate("users://{userID}.profile", { list: undefined}), 
+// {
+//     description: "Get  users details from the database",
+//     title: "User Details",
+//     mimeType: "application/json"
+// }, async (uri, { userID }) => {
+//     const users = await import ("./data/users.json", {
+//         with: {
+//             type: "json"
+//         }
+//     }).then(m => m.default)
+
+//         return {
+//             contents: [
+//                 {
+//                     uri: uri.href, text: JSON.stringify(users), MimeType: "application/json"
+//                 },
+//             ]
+//         }
+// }
+// )
+
+
+// First Tool
 server.tool("create-user", "Create a new user in the database", {
     name : z.string(),
     email: z.string(),
