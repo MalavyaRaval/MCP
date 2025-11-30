@@ -7,7 +7,8 @@
     "server:build:watch": "tsc --watch",
     "server:dev": "tsx src/server.ts",
     "server:inspect": "set DANGEROUSLY_OMIT_AUTH=true && npx @modelcontextprotocol/inspector npm run server:dev",
-    "client:dev": "tsx src/client.ts"
+    "client:dev": "tsx src/client.ts",
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,6 @@
     "@modelcontextprotocol/sdk": "^1.23.0",
     "ai": "^5.0.104",
     "dotenv": "^16.5.0",
-    "zod": "^3.25.67"
+    "zod": "^3.25.76"
   }
 }

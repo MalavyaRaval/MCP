@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "address": "123 Maple Street, Springfield, USA",
+    "phone": "555-1111"
+  },
+  {
+    "id": 2,
+    "name": "Bella Johnson",
+    "email": "bella@example.com",
+    "address": "123 Maple Street, USA",
+    "phone": "555-2222"
+  },
+  {
+    "id": 3,
+    "name": "Charlie Johnson",
+    "email": "charlie@example.com",
+    "address": "123 Maple Street",
+    "phone": "555-3333"
+  },
+  {
+    "id": 4,
+    "name": "Malavya",
+    "email": "mraval@sfsu.edu",
+    "address": "355 Serrano Drive",
+    "phone": "123-4444"
+  },
+  {
+    "id": 5,
+    "name": "Mnm",
+    "email": "mnm@test.com",
+    "address": "225 Lometa Ave",
+    "phone": "111-5555"
+  },
+  {
+    "id": 6,
+    "name": "asdf Doe",
+    "email": "john.doe@example.com",
+    "address": "123 Main Street, San Francisco, CA 94102",
+    "phone": "555-123-4567"
+  },
+  {
+    "id": 7,
+    "name": "Alpha Beta",
+    "email": "alpha@sfsu.edu",
+    "address": "San Francisco, CA",
+    "phone": "555-0000"
+  }
+]
