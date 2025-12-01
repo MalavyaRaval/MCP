@@ -23,27 +23,11 @@ server.resource(
             type: "json"
         }
     }).then(m => m.default)
-    
-    const user = users.find(u => u.id === parseInt(userID as string))
-
-    if(user == null){
-        return {
-            contents: [
-                {
-                    uri: uri.href, 
-                    text: JSON.stringify({ error: "User not found" }), 
-                    mimeType: "application/json"
-                },
-            ]
-        }
-    }
-
-        
 
         return {
             contents: [
                 {
-                    uri: uri.href, text: JSON.stringify(user), mimeType: "application/json"
+                    uri: uri.href, text: JSON.stringify(users), MimeType: "application/json"
                 },
             ]
         }
@@ -51,27 +35,43 @@ server.resource(
 )
 
 // First Resource Template
-// server.resource("user-details", new ResourceTemplate("users://{userID}.profile", { list: undefined}), 
-// {
-//     description: "Get  users details from the database",
-//     title: "User Details",
-//     mimeType: "application/json"
-// }, async (uri, { userID }) => {
-//     const users = await import ("./data/users.json", {
-//         with: {
-//             type: "json"
-//         }
-//     }).then(m => m.default)
+server.resource("user-details", new ResourceTemplate("users://{userID}/profile", { list: undefined}), 
+{
+        description: "Get a user's details from the database",
+        title: "User Details",
+        mimeType: "application/json"
+    }, async (uri, {userID}) => {
 
-//         return {
-//             contents: [
-//                 {
-//                     uri: uri.href, text: JSON.stringify(users), MimeType: "application/json"
-//                 },
-//             ]
-//         }
-// }
-// )
+        const users = await import ("./data/users.json", {
+        with: {
+            type: "json"
+        },
+    }).then(m => m.default)
+
+    const user = users.find(u => u.id === parseInt(userID as string))
+
+    if (user == null){
+        return {
+            contents: [
+                {
+                    uri: uri.href,
+                    text: JSON.stringify({ error: "User not found" }),
+                    mimeType: "application/json"
+                }
+            ]
+        }
+    }
+
+        return {
+            contents: [
+                {
+                    uri: uri.href,
+                    text: JSON.stringify(user),
+                    mimeType: "application/json"
+                },
+            ]
+        }
+    })
 
 
 // First Tool

@@ -2,16 +2,15 @@
 	"servers": {
 		"my-mcp-server-new": {
 			"type": "stdio",
-			"command": "npm",
-			"args": ["run", "start"],
+			"command": "node",
+			"args": ["build/server.js"],
 			"cwd": "${workspaceFolder}",
 			"dev": {
-				"watch": "build/**/*.ts",
+				"watch": "build/**/*.js",
 				"debug": {
 					"type": "node"
 				}
 			}
 		}
-	},
-	"inputs": []
+	}
 }

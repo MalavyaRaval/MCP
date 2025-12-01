@@ -47,5 +47,12 @@
     "email": "alpha@sfsu.edu",
     "address": "San Francisco, CA",
     "phone": "555-0000"
+  },
+  {
+    "id": 8,
+    "name": "new user",
+    "email": "newuser@ex.com",
+    "address": "1010 lobo street",
+    "phone": "415-9999"
   }
 ]
