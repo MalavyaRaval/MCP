@@ -21,11 +21,11 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@ai-sdk/google": "^1.2.19",
-    "@inquirer/prompts": "^7.5.3",
+    "@ai-sdk/google": "^1.2.22",
+    "@inquirer/prompts": "^7.10.1",
     "@modelcontextprotocol/sdk": "^1.23.0",
     "ai": "^5.0.104",
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.6.1",
     "zod": "^3.25.76"
   }
 }
