@@ -6,5 +6,5 @@ Create-Random-User
 Find-User-Details  
 Find-All_Users  
 
-## This repo is inspired by and an updated version of:  
+## This repo is an updated version of:  
 https://www.youtube.com/watch?v=ZoZxQwp1PiM
