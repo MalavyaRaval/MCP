@@ -16,16 +16,16 @@ export class Orchestrator {
 
   private setupRoutes() {
     this.app.use(express.json());
-    
-    // Serve static dashboard
     this.app.use(express.static(path.join(__dirname, '../../public')));
+
+    // Get active agents
+    this.app.get('/api/agents', (req, res) => {
+      res.json({ agents: this.router.getAgents() });
+    });
 
     this.app.post('/orchestrate', (req, res) => {
       const { action, target, payload } = req.body;
-      
-      console.log(`Orchestrating action: ${action} for ${target}`);
       this.communicator.send(target, { type: action, data: payload });
-      
       res.json({ status: 'dispatched', timestamp: new Date().toISOString() });
     });
 

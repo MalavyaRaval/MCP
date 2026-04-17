@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Orchestrator = void 0;
 const express_1 = __importDefault(require("express"));
+const path_1 = __importDefault(require("path"));
 class Orchestrator {
     constructor(router, communicator) {
         this.app = (0, express_1.default)();
@@ -14,10 +15,11 @@ class Orchestrator {
     }
     setupRoutes() {
         this.app.use(express_1.default.json());
+        // Serve static dashboard
+        this.app.use(express_1.default.static(path_1.default.join(__dirname, '../../public')));
         this.app.post('/orchestrate', (req, res) => {
             const { action, target, payload } = req.body;
             console.log(`Orchestrating action: ${action} for ${target}`);
-            // Coordinate agent interaction
             this.communicator.send(target, { type: action, data: payload });
             res.json({ status: 'dispatched', timestamp: new Date().toISOString() });
         });
