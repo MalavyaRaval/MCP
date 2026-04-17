@@ -16,9 +16,8 @@ export class Orchestrator {
 
   private setupRoutes() {
     this.app.use(express.json());
-    this.app.use(express.static(path.join(__dirname, '../../public')));
-
-    // Get active agents
+    
+    // API routes first
     this.app.get('/api/agents', (req, res) => {
       res.json({ agents: this.router.getAgents() });
     });
@@ -28,6 +27,9 @@ export class Orchestrator {
       this.communicator.send(target, { type: action, data: payload });
       res.json({ status: 'dispatched', timestamp: new Date().toISOString() });
     });
+
+    // Static files last
+    this.app.use(express.static(path.join(__dirname, '../../public')));
 
     this.app.listen(3000, () => console.log('Orchestrator API running on port 3000'));
   }
