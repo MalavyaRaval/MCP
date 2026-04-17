@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Swarm Dashboard</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        #log { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Agent Swarm Dashboard</h1>
+    <div class="grid">
+        <div>
+            <h2>Controls</h2>
+            <button onclick="pingAgent()">Ping Agent-1</button>
+        </div>
+        <div>
+            <h2>Live Log</h2>
+            <div id="log"></div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

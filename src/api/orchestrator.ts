@@ -1,6 +1,7 @@
 import express from 'express';
 import { AgentRouter } from '../routing/router';
 import { AgentCommunication } from '../communication/tcp-server';
+import path from 'path';
 
 export class Orchestrator {
   private app = express();
@@ -15,13 +16,14 @@ export class Orchestrator {
 
   private setupRoutes() {
     this.app.use(express.json());
+    
+    // Serve static dashboard
+    this.app.use(express.static(path.join(__dirname, '../../public')));
 
     this.app.post('/orchestrate', (req, res) => {
       const { action, target, payload } = req.body;
       
       console.log(`Orchestrating action: ${action} for ${target}`);
-      
-      // Coordinate agent interaction
       this.communicator.send(target, { type: action, data: payload });
       
       res.json({ status: 'dispatched', timestamp: new Date().toISOString() });
