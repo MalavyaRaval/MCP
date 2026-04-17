@@ -2,9 +2,14 @@
 const socket = new WebSocket(`ws://${window.location.host}`);
 
 socket.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    if (data.type === 'status') {
-        appendLog(`[${data.agentId}] ${data.message}`);
+    try {
+        const data = JSON.parse(event.data);
+        console.log('Received WebSocket message:', data); // Debugging
+        if (data.type === 'status') {
+            appendLog(`[${data.agentId}] ${data.message}`);
+        }
+    } catch (err) {
+        console.error('Failed to parse WS message:', err);
     }
 };
 
