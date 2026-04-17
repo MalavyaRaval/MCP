@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "test:client": "tsx test-client.ts"
+    "test:client": "tsx test-client.ts",
+    "agent": "tsx agent-instance.ts"
   },
   "dependencies": {
     "ws": "^8.18.0",
