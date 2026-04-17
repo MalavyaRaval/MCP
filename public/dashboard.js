@@ -9,7 +9,7 @@ async function updateAgentList() {
         const data = await response.json();
         const list = document.getElementById('agent-list');
         if (list) {
-            list.innerHTML = data.agents.map((id) => `<li>${id}</li>`).join('');
+            list.innerHTML = data.agents.map(id => `<li>${id}</li>`).join('');
         }
     } catch (err) {
         console.error('Error fetching agents:', err);
@@ -17,7 +17,7 @@ async function updateAgentList() {
 }
 
 window.pingAgent = function() {
-    const input = document.getElementById('agent-input') as HTMLInputElement;
+    const input = document.getElementById('agent-input');
     const target = input.value || 'agent-1';
     
     fetch('/orchestrate', {
