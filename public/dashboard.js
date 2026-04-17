@@ -1,3 +1,13 @@
+// Connect to Orchestrator's WebSocket for live updates
+const socket = new WebSocket(`ws://${window.location.host}`);
+
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (data.type === 'status') {
+        appendLog(`[${data.agentId}] ${data.message}`);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     updateAgentList();
     setInterval(updateAgentList, 5000);
@@ -27,10 +37,22 @@ window.pingAgent = function() {
     })
     .then(res => res.json())
     .then(data => {
-        const log = document.getElementById('log');
-        if (log) {
-            log.innerHTML += `<p>Dispatched to ${target}: ${data.timestamp}</p>`;
-        }
+        appendLog(`Dispatched to ${target}: ${data.timestamp}`);
     })
     .catch(err => console.error('Ping error:', err));
+}
+
+window.runTask = function(taskType) {
+    const target = document.getElementById('agent-input').value || 'agent-1';
+    
+    fetch('/orchestrate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: taskType, target: target, payload: `Executing ${taskType}` })
+    })
+    .then(res => res.json())
+    .then(data => {
+        appendLog(`Task '${taskType}' dispatched to ${target}: ${data.timestamp}`);
+    })
+    .catch(err => console.error('Task error:', err));
 }

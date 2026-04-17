@@ -3,8 +3,8 @@ import { WebSocketServer, WebSocket } from 'ws';
 export class AgentRouter {
   private wss: WebSocketServer;
   private connectedAgents: Map<string, WebSocket> = new Map();
-  // Callback to notify dashboard
   public onAgentUpdate: (agents: string[]) => void = () => {};
+  public onAgentMessage: (senderId: string, message: any) => void = () => {};
 
   constructor(port: number) {
     this.wss = new WebSocketServer({ port });
@@ -22,6 +22,7 @@ export class AgentRouter {
       ws.on('message', (data: Buffer) => {
         try {
           const message = JSON.parse(data.toString());
+          this.onAgentMessage(agentId, message);
           this.routeDecision(message, agentId);
         } catch (e) {
           console.error('Failed to parse decision message:', e);
